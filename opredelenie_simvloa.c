@@ -1,25 +1,34 @@
 #include <stdio.h>
+#define GROUP_SMALL_LETTER 1
+#define GROUP_CAPITAL_LETTER 2
+#define GR0UP_NUMBER 3
+#define GR0UP_SYMBOL 0
 
 int in_string(unsigned char ch, unsigned char* str);
+int classify_char(unsigned char ch);
 
 int main() {
     unsigned char ch;
     printf("input char:");
     scanf("%c", &ch);
+    int h = classify_char(ch);
+    printf("%d", h);
+}
+
+int classify_char(unsigned char ch) {
     unsigned char str1[] = "abcdefghijklmnopqrstuvwxyz";
     unsigned char str2[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     unsigned char str3[] = "0123456789";
     if (in_string(ch, str1)) {
-        printf("bukva small");
+        return GROUP_SMALL_LETTER;
     }
-    else if (in_string(ch, str2)) {
-        printf("bukva big");
+    if (in_string(ch, str2)) {
+        return GROUP_CAPITAL_LETTER;
     }
-    else if (in_string(ch, str3)) {
-        printf("cifra");
+    if (in_string(ch, str3)) {
+        return GR0UP_NUMBER;
     }
-    else printf("simvol");
-    return 0;
+    return GR0UP_SYMBOL;
 }
 
 int in_string(unsigned char ch, unsigned char* str) {
